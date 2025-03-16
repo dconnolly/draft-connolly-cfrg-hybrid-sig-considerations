@@ -155,9 +155,11 @@ message.
 For streaming, the SE can accumulate the message by updating the SHAKE256
 state, only having to keep track of the state.
 
-Since ML-DSA can be both prehashed and streamed, the HashML-DSA variation
-defined in {{FIPS204}} is superfluous and SHOULD NOT be used to reduce
-interoperability difficulties.
+ML-DSA supports both prehashed and streamed variants. These variants are interoperable
+with the 'pure' ML-DSA defined in {{FIPS204}}, allowing a message signed with one
+variant to be verified with the other. In contrast, the HashML-DSA variation defined
+in {{FIPS204}} does not provide such property, it is superfluous and SHOULD NOT
+be used to reduce interoperability difficulties.
 
 ## Security Considerations for SLH-DSA {#slh-dsa}
 
@@ -166,8 +168,8 @@ streaming messages. The HashSLH-DSA variant defined in {{FIPS205}} MAY be
 used to allow for prehashing and streaming. Alternatively, working groups can
 design protocols in such a fashion that any message that has to be signed is
 small enough to be transmitted over the network or be held in the memory of a
-HSM.  If HashSLH-DSA is used, the hash function used for the prehash MUST be
-part of the public key. It is RECOMMENDED to use the same hash function for
+HSM.  If HashSLH-DSA is used, the identifier of the hash function used for the prehash
+MUST be part of the public key. It is RECOMMENDED to use the same hash function for
 the prehash as is used for the rest of SLH-DSA, but the hash function MUST
 have collision resistance on par with the security level. (TODO maybe add a
 list instead of leaving it like this)
